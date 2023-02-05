@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="819.0" prefWidth="1217.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.denttoolbox.HelloController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane prefHeight="820.0" prefWidth="622.0" styleClass="left-form" stylesheets="@css/loginDesign.css" AnchorPane.leftAnchor="0.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="186.0" layoutY="457.0" prefHeight="43.0" prefWidth="272.0" styleClass="title-text" stylesheets="@css/loginDesign.css" text="DENT Toolbox" textFill="WHITE">
+                     <font>
+                        <Font name="Tahoma" size="29.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="210.0" layoutY="774.0" text="Copyright © Jacek Studzinski, 2022" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Line endX="144.0" layoutX="316.0" layoutY="440.0" startX="-134.0" stroke="WHITE" />
+                  <FontAwesomeIcon fill="WHITE" glyphName="ROCKET" layoutX="231.0" layoutY="391.0" size="15em" styleClass="rocket" text="" wrappingWidth="229.1428575515747" />
+                  <Label fx:id="lbl_currentDate" layoutX="14.0" layoutY="23.0" styleClass="date-label" stylesheets="@css/loginDesign.css" text="Current Date" textFill="#22a9f275">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="635.0" prefHeight="820.0" prefWidth="595.0" styleClass="right-form" stylesheets="@css/loginDesign.css" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <FontAwesomeIcon fill="#fffffffa" glyphName="USER" layoutX="264.0" layoutY="218.0" size="7em" />
+                  <Label layoutX="253.0" layoutY="250.0" text="Welcome" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtField_hostname" layoutX="194.0" layoutY="309.0" onKeyTyped="#hide_error_button" prefHeight="36.0" prefWidth="214.0" promptText="hostname" styleClass="textfield" stylesheets="@css/loginDesign.css" />
+                  <TextField fx:id="txtField_port" layoutX="194.0" layoutY="356.0" onKeyTyped="#hide_error_button" prefHeight="36.0" prefWidth="214.0" promptText="port" styleClass="textfield" stylesheets="@css/loginDesign.css" />
+                  <TextField fx:id="txtField_username" layoutX="194.0" layoutY="402.0" onKeyTyped="#hide_error_button" prefHeight="36.0" prefWidth="214.0" promptText="username" styleClass="textfield" stylesheets="@css/loginDesign.css" />
+                  <PasswordField fx:id="txtField_password" layoutX="194.0" layoutY="451.0" onKeyTyped="#hide_error_button" prefHeight="36.0" prefWidth="214.0" promptText="password" styleClass="textfield" stylesheets="@css/loginDesign.css" />
+                  <Button layoutX="194.0" layoutY="496.0" mnemonicParsing="false" onAction="#login" onKeyPressed="#login" prefHeight="36.0" prefWidth="214.0" styleClass="login-btn" stylesheets="@css/loginDesign.css" text="Login" />
+                  <Button fx:id="btn_login" layoutX="529.0" layoutY="14.0" mnemonicParsing="false" onAction="#close" styleClass="close" stylesheets="@css/loginDesign.css">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" size="2em" styleClass="close" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="error_button" layoutX="162.0" layoutY="544.0" mnemonicParsing="false" onAction="#hide_error_button" prefHeight="84.0" prefWidth="279.0" styleClass="error-button" stylesheets="@css/loginDesign.css" text="Button" textFill="WHITE" visible="false" wrapText="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

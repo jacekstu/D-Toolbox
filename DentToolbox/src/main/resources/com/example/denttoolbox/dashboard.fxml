@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="819.0" prefWidth="1217.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.denttoolbox.DashboardController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <BorderPane prefHeight="819.0" prefWidth="1217.0" styleClass="backy" stylesheets="@css/dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="35.0" prefWidth="1217.0" styleClass="top-form" stylesheets="@css/dashboard.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <FontAwesomeIcon fill="WHITE" glyphName="ROCKET" layoutX="14.0" layoutY="27.0" size="1.6em" text="" />
+                        <Label layoutX="42.0" layoutY="11.0" text="DART Entitlements Toolbox" textFill="WHITE">
+                           <font>
+                              <Font name="Franklin Gothic Book" size="15.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="1177.0" layoutY="6.0" mnemonicParsing="false" onAction="#close" styleClass="close" stylesheets="@css/dashboard.css">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" text="" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btn_minimize" alignment="BOTTOM_CENTER" layoutX="1151.0" layoutY="6.0" mnemonicParsing="false" onAction="#minimize" styleClass="minimise" stylesheets="@css/dashboard.css" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="MINUS" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane prefHeight="784.0" prefWidth="1218.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane prefHeight="791.0" prefWidth="235.0" styleClass="nav-form" stylesheets="@css/dashboard.css" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0">
+                           <children>
+                              <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="77.0" layoutY="131.0" size="7em" text="" wrappingWidth="78.4285717010498" />
+                              <Label layoutX="77.0" layoutY="155.0" text="Welcome" textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbl_username" alignment="CENTER" contentDisplay="CENTER" layoutX="33.0" layoutY="176.0" prefHeight="28.0" prefWidth="165.0" text="username" textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma" size="22.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="100.0" layoutX="100.0" layoutY="224.0" startX="-69.0" stroke="WHITE" />
+                              <Button fx:id="btn_logout" layoutX="46.0" layoutY="714.0" mnemonicParsing="false" onAction="#logout" stylesheets="@css/dashboard.css">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" size="2.3em" text="" />
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="logout" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                              </Button>
+                              <Label layoutX="100.0" layoutY="722.0" text="Sign Out" textFill="WHITE">
+                                 <font>
+                                    <Font name="Franklin Gothic Book" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btn_home" layoutX="-2.0" layoutY="300.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="42.0" prefWidth="235.0" styleClass="nav-btn" stylesheets="@css/dashboard.css" text="Home" AnchorPane.leftAnchor="0.0">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" size="1.6em" text="" />
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="btn_serviceModifier" layoutX="-1.0" layoutY="342.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="42.0" prefWidth="235.0" styleClass="nav-btn" stylesheets="@css/dashboard.css" text="Service Modifier" AnchorPane.leftAnchor="0.0">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="CLIPBOARD" size="1.3em" />
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="btn_entitlementModifier" layoutY="384.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="42.0" prefWidth="235.0" styleClass="nav-btn" stylesheets="@css/dashboard.css" text="Entitlement Set Modifier" AnchorPane.leftAnchor="0.0">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="EDIT" size="1.3em" />
+                                 </graphic></Button>
+                              <Button fx:id="btn_entityCreator" layoutY="426.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="42.0" prefWidth="235.0" styleClass="nav-btn" stylesheets="@css/dashboard.css" text=" Entity Creator">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="BUILDING" size="1.3em" />
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="btn_serviceDefCreator" layoutX="5.0" layoutY="468.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="42.0" prefWidth="235.0" styleClass="nav-btn" stylesheets="@css/dashboard.css" text=" Service Def Creator" AnchorPane.leftAnchor="0.0">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="FILE" size="1.3em" />
+                                 </graphic></Button>
+                              <Button fx:id="btn_siteServerConfigCreator" layoutY="510.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="42.0" prefWidth="235.0" styleClass="nav-btn" stylesheets="@css/dashboard.css" text=" SiteServer Config Creator">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="CODE" size="1.3em" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="784.0" prefWidth="0.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane fx:id="form_home" layoutX="-983.0" prefHeight="785.0" prefWidth="977.0" style="-fx-background-color: transparent;" visible="false">
+                           <children>
+                              <AnchorPane layoutX="39.0" layoutY="49.0" prefHeight="132.0" prefWidth="911.0" styleClass="card4" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Welcome to Dart Entitlements Toolbox user " textFill="WHITE">
+                                       <font>
+                                          <Font name="Clarendon Lt BT Light" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_welcome_msg_username" layoutX="409.0" layoutY="15.0" prefHeight="20.0" prefWidth="154.0" textFill="WHITE">
+                                       <font>
+                                          <Font name="Cambria Math" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="47.0" text="This tool will help you with assigning and unassigning services and entitlement sets from users." textFill="WHITE">
+                                       <font>
+                                          <Font name="Clarendon Lt BT Light" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="67.0" text="With the use of DART entitlements Toolbox you can create a variety of different entities e.g.  Client, Site or Site User entities. " textFill="WHITE">
+                                       <font>
+                                          <Font name="Clarendon Lt BT Light" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="85.0" text="You can also use it to generate Service Definition files." textFill="WHITE">
+                                       <font>
+                                          <Font name="Clarendon Lt BT Light" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="39.0" layoutY="221.0" prefHeight="200.0" prefWidth="277.0" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="GLOBE" layoutX="113.0" layoutY="70.0" size="5em" text="" />
+                                    <Label layoutX="54.0" layoutY="160.0" text="Current number of Clients" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_number_of_clients" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="100.0" prefHeight="32.0" prefWidth="207.0" textFill="WHITE">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="card" />
+                                    <String fx:value="card1" />
+                                 </styleClass>
+                              </AnchorPane>
+                              <AnchorPane layoutX="357.0" layoutY="221.0" prefHeight="200.0" prefWidth="277.0" styleClass="card2" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <Label layoutX="54.0" layoutY="160.0" text="Current number of Sites" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_number_of_sites" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="100.0" prefHeight="32.0" prefWidth="207.0" textFill="WHITE">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="CUBE" layoutX="106.0" layoutY="65.0" size="5em" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="675.0" layoutY="221.0" prefHeight="200.0" prefWidth="277.0" styleClass="card3" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="USERS" layoutX="116.0" layoutY="60.0" size="3.5em" />
+                                    <Label layoutX="43.0" layoutY="161.0" text="Current number of Site Users" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_number_of_siteUsers" alignment="CENTER" contentDisplay="CENTER" layoutX="35.0" layoutY="100.0" prefHeight="32.0" prefWidth="207.0" textFill="WHITE">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="39.0" layoutY="465.0" prefHeight="277.0" prefWidth="426.0" styleClass="card5" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="CUBE" layoutX="46.0" layoutY="176.0" size="8em" text="" />
+                                    <Label fx:id="lbl_pending_changes_message" alignment="CENTER" contentDisplay="CENTER" layoutX="145.0" layoutY="107.0" prefHeight="71.0" prefWidth="280.0" textFill="WHITE" visible="false">
+                                       <font>
+                                          <Font name="Tahoma" size="16.0" />
+                                       </font></Label>
+                                    <Label fx:id="lbl_pendoingChangesHeader" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="40.0" prefHeight="35.0" prefWidth="411.0" text="Number of pending changes" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_pendingChangesRecommendMessage" layoutX="70.0" layoutY="219.0" text="It is recommended do distribute all pending changes" textFill="WHITE">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_numberPendingChanges" layoutX="213.0" layoutY="121.0" prefHeight="57.0" prefWidth="111.0" text="4" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma Bold" size="45.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="489.0" layoutY="541.0" prefHeight="53.0" prefWidth="477.0" styleClass="card6" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <Label layoutX="24.0" layoutY="18.0" text="Client &gt; " textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_lastClient" layoutX="107.0" layoutY="18.0" prefHeight="20.0" prefWidth="365.0" text="No Clients in the database" textFill="WHITE" AnchorPane.rightAnchor="5.0">
+                                       <font>
+                                          <Font name="Tahoma" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="489.0" layoutY="615.0" prefHeight="53.0" prefWidth="477.0" styleClass="card7" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <Label layoutX="26.0" layoutY="17.0" text="Site &gt; " textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_lastSite" layoutX="105.0" layoutY="17.0" prefHeight="20.0" prefWidth="365.0" text="No Clients in the database" textFill="WHITE" AnchorPane.rightAnchor="7.0">
+                                       <font>
+                                          <Font name="Tahoma" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="489.0" layoutY="689.0" prefHeight="53.0" prefWidth="477.0" styleClass="card8" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <Label layoutX="26.0" layoutY="19.0" text="Site User &gt; " textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_lastUser" layoutX="111.0" layoutY="18.0" prefHeight="20.0" prefWidth="350.0" text="No Site Users in the database" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="489.0" layoutY="465.0" prefHeight="53.0" prefWidth="477.0" styleClass="card6" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <FontAwesomeIcon fill="WHITE" layoutX="35.0" layoutY="35.0" size="2em" />
+                                    <Label layoutX="114.0" layoutY="14.0" prefHeight="26.0" prefWidth="250.0" text="Most recently created items" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="17.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <Label alignment="CENTER" layoutX="893.0" layoutY="754.0" prefHeight="17.0" prefWidth="70.0" text="Version 1.0" textFill="#a18d8d" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="form_serviceModifier" layoutX="-983.0" prefHeight="785.0" prefWidth="977.0" visible="false">
+                           <children>
+                              <AnchorPane layoutX="24.0" layoutY="51.0" prefHeight="220.0" prefWidth="339.0" styleClass="card4" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="21.0" prefHeight="19.0" prefWidth="317.0" text="Assign/unassign services from/to sites/sitUsers" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="75.0" prefHeight="19.0" prefWidth="311.0" text="Add service(s)" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="101.0" prefHeight="19.0" prefWidth="312.0" text="add:service:siteName:serv1,serv2...serv(n)" textFill="#15fffb">
+                                       <font>
+                                          <Font name="Tahoma" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="165.0" prefHeight="19.0" prefWidth="312.0" text="delete:service:siteName:serv1,serv2...serv(n)" textFill="#15fffb">
+                                       <font>
+                                          <Font name="Tahoma" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="15.0" layoutY="139.0" prefHeight="19.0" prefWidth="311.0" text="Delete service(s)" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Line endX="164.0" layoutX="161.0" layoutY="56.0" startX="-147.0" stroke="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                              <Label layoutX="893.0" layoutY="754.0" prefHeight="17.0" prefWidth="70.0" text="Version 1.0" textFill="#908a8a" />
+                              <AnchorPane fx:id="anchorPane_loading" layoutX="23.0" layoutY="297.0" prefHeight="440.0" prefWidth="342.0" styleClass="load_anchor" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <Button fx:id="btn_loadFile" mnemonicParsing="false" onAction="#selectFile" prefHeight="40.0" prefWidth="342.0" styleClass="load_btn" stylesheets="@css/dashboard.css" text="Load services file" textFill="WHITE">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="btn_execute" layoutY="406.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="342.0" stylesheets="@css/dashboard.css" text="Execute" textFill="WHITE">
+                                       <styleClass>
+                                          <String fx:value="load_btn" />
+                                          <String fx:value="execute_btn" />
+                                       </styleClass>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <ComboBox fx:id="ComboBox_sitesSelectEndpoint" layoutY="40.0" onAction="#selectEndpoint" prefHeight="40.0" prefWidth="342.0" promptText="Select endpoint" styleClass="combo_box" stylesheets="@css/dashboard.css" />
+                                    <AnchorPane fx:id="anchorPaneModifyService" disable="true" layoutX="58.0" layoutY="123.0" prefHeight="200.0" prefWidth="196.0">
+                                       <children>
+                                          <FontAwesomeIcon fx:id="modifyServicesImage" fill="WHITE" glyphName="PAPER_PLANE" layoutX="65.0" layoutY="124.0" size="6em" />
+                                       </children>
+                                    </AnchorPane>
+                                    <Label fx:id="labelek" alignment="CENTER" layoutX="81.0" layoutY="323.0" prefHeight="17.0" prefWidth="186.0" text="Calculating..." textFill="WHITE" visible="false">
+                                       <font>
+                                          <Font name="Tahoma" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="img_loading" fitHeight="60.0" fitWidth="60.0" layoutX="141.0" layoutY="163.0" opacity="0.68" pickOnBounds="true" preserveRatio="true" visible="false">
+                                       <image>
+                                          <Image url="@css/FINAAL_KOLO.png" />
+                                       </image>
+                                    </ImageView>
+                                    <StackPane fx:id="stackPane_loadingBarHolder" layoutX="49.0" layoutY="123.0" prefHeight="179.0" prefWidth="245.0" visible="false" />
+                                    <AnchorPane fx:id="anchorPaneStats" layoutX="31.0" layoutY="95.0" prefHeight="257.0" prefWidth="280.0" visible="false">
+                                       <children>
+                                          <Label alignment="CENTER" layoutX="22.0" layoutY="49.0" prefHeight="32.0" prefWidth="237.0" text="Are you sure you want to:" textFill="WHITE">
+                                             <font>
+                                                <Font name="Tahoma" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="labelAddServiceNumber" alignment="CENTER" layoutX="22.0" layoutY="97.0" prefHeight="32.0" prefWidth="237.0" text="Add " textFill="WHITE">
+                                             <font>
+                                                <Font name="Tahoma" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="btn_proceed" layoutX="60.0" layoutY="203.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="162.0" stylesheets="@css/dashboard.css" text="Proceed" textFill="WHITE">
+                                             <styleClass>
+                                                <String fx:value="logout" />
+                                                <String fx:value="shadow" />
+                                             </styleClass>
+                                          </Button>
+                                          <Label fx:id="labelDeleteServiceNumber" alignment="CENTER" layoutX="22.0" layoutY="136.0" prefHeight="32.0" prefWidth="237.0" text="Delete" textFill="WHITE">
+                                             <font>
+                                                <Font name="Tahoma" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Line endX="119.0" layoutX="140.0" layoutY="89.0" startX="-123.0" stroke="#0c8eff" />
+                                          <FontAwesomeIcon fill="WHITE" glyphName="PLUS" layoutX="30.0" layoutY="123.0" size="2em" />
+                                          <FontAwesomeIcon fill="WHITE" glyphName="MINUS" layoutX="30.0" layoutY="162.0" size="2em" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="anchorPane_operationsCount" layoutX="10.0" layoutY="297.0" prefHeight="76.0" prefWidth="322.0" visible="false">
+                                       <children>
+                                          <Label fx:id="lbl_operCountString" layoutX="74.0" layoutY="29.0" prefHeight="18.0" prefWidth="145.0" text="Number of operations:" textFill="WHITE">
+                                             <font>
+                                                <Font name="Tahoma" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbl_operationCount" layoutX="219.0" layoutY="28.0" prefHeight="21.0" prefWidth="89.0" textFill="#25e4d4">
+                                             <font>
+                                                <Font name="Tahoma Bold" size="17.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="ancohor_ErrorsView" layoutX="5.0" layoutY="312.0" prefHeight="83.0" prefWidth="332.0" visible="false">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="44.0" prefHeight="17.0" prefWidth="113.0" text="Number of errors: " textFill="WHITE">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="label_numberErrors" layoutX="127.0" layoutY="44.0" textFill="#c92d93">
+                                             <font>
+                                                <Font name="Tahoma Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="btn_downloadErrors" layoutX="217.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#saveErrorsFile" prefHeight="34.0" prefWidth="101.0" styleClass="button_download_errors" stylesheets="@css/dashboard.css" text="Download " textFill="WHITE" />
+                                          <Line endX="203.0" layoutX="114.0" layoutY="22.0" startX="-100.0" stroke="#1c95eb" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <TableView fx:id="table_services" layoutX="389.0" layoutY="141.0" prefHeight="555.0" prefWidth="574.0" stylesheets="@css/dashboard.css">
+                                <columns>
+                                  <TableColumn fx:id="col_type" prefWidth="61.0" text="Type" />
+                                  <TableColumn fx:id="col_name" prefWidth="223.0" text="Name" />
+                                    <TableColumn fx:id="col_action" prefWidth="89.0" resizable="false" text="Action" />
+                                    <TableColumn fx:id="col_user" prefWidth="101.0" resizable="false" text="User" />
+                                    <TableColumn fx:id="col_hostname" prefWidth="98.0" resizable="false" text="Hostname" />
+                                </columns>
+                              </TableView>
+                              <AnchorPane layoutX="390.0" layoutY="51.0" prefHeight="76.0" prefWidth="571.0" styleClass="search_bar" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <TextField fx:id="filterField" layoutX="95.0" layoutY="23.0" prefHeight="25.0" prefWidth="442.0" styleClass="textfield_search" stylesheets="@css/dashboard.css" />
+                                    <Label layoutX="33.0" layoutY="29.0" prefHeight="18.0" prefWidth="52.0" text="Search:" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="387.0" layoutY="703.0" prefHeight="40.0" prefWidth="573.0" stylesheets="@css/dashboard.css">
+                                 <styleClass>
+                                    <String fx:value="search_bar" />
+                                    <String fx:value="download_excel" />
+                                 </styleClass>
+                                 <children>
+                                    <Button fx:id="btn_excelDownload" layoutX="429.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#saveExcelFile" prefHeight="26.0" prefWidth="137.0" styleClass="btn_excel_download" stylesheets="@css/dashboard.css" text="Excel Download" textFill="WHITE" visible="false">
+                                       <font>
+                                          <Font name="Tahoma" size="13.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="form_entityCreator" layoutX="-983.0" prefHeight="784.0" prefWidth="972.0">
+                           <children>
+                              <AnchorPane layoutX="30.0" layoutY="30.0" prefHeight="716.0" prefWidth="232.0" styleClass="create_entity_anchor" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <ComboBox fx:id="combobox_endpoints" layoutY="16.0" onAction="#selectEndpointToCreate" prefHeight="30.0" prefWidth="232.0" promptText="Select Endpoint" styleClass="combo_box" stylesheets="@css/dashboard.css" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="CUBES" layoutX="62.0" layoutY="554.0" size="7em" />
+                                    <Label layoutX="46.0" layoutY="171.0" text="Database inventory" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="21.0" layoutY="240.0" text="Clients:" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="21.0" layoutY="274.0" text="Sites:" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="22.0" layoutY="314.0" text="Site Users:" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Line endX="93.0" layoutX="113.0" layoutY="216.0" startX="-101.0" stroke="WHITE" />
+                                    <Line endX="93.0" layoutX="114.0" layoutY="394.0" startX="-104.0" stroke="WHITE" />
+                                    <Label fx:id="lbl_current_clients" layoutX="139.0" layoutY="239.0" prefHeight="17.0" prefWidth="81.0" textFill="#4fd0e4">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_current_sites" layoutX="139.0" layoutY="273.0" prefHeight="20.0" prefWidth="81.0" textFill="#4fd0e4">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_current_csiteusers" layoutX="139.0" layoutY="313.0" prefHeight="20.0" prefWidth="81.0" textFill="#4fd0e4">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="22.0" layoutY="349.0" text="Entitlement Sets:" textFill="WHITE">
+                                       <font>
+                                          <Font name="Tahoma" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_current_entsets" layoutX="139.0" layoutY="349.0" prefHeight="20.0" prefWidth="81.0" text="0" textFill="#4fd0e4">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="283.0" layoutY="29.0" prefHeight="717.0" prefWidth="659.0" styleClass="create_entity_anchor" stylesheets="@css/dashboard.css">
+                                 <children>
+                                    <AnchorPane fx:id="anchor_no_entity" prefHeight="716.0" prefWidth="659.0" visible="false">
+                                       <children>
+                                          <FontAwesomeIcon fill="WHITE" glyphName="CUBE" layoutX="258.0" layoutY="409.0" size="12em" />
+                                          <Label layoutX="180.0" layoutY="486.0" text="Start populating your database" textFill="WHITE">
+                                             <font>
+                                                <Font name="Tahoma" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="251.0" layoutY="214.0" text="Entity Creator" textFill="WHITE">
+                                             <font>
+                                                <Font name="Tahoma" size="26.0" />
+                                             </font>
+                                          </Label>
+                                          <Line endX="149.0" layoutX="330.0" layoutY="468.0" startX="-149.0" stroke="WHITE" strokeWidth="3.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="anchor_create_client" layoutX="2.0" layoutY="1.0" prefHeight="715.0" prefWidth="659.0">
+                                       <children>
+                                          <Label layoutX="258.0" layoutY="25.0" text="Create Client(s) Task" textFill="WHITE">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font></Label>
+                                          <Label layoutX="582.0" layoutY="69.0" text="Randomize" textFill="WHITE" />
+                                          <CheckBox graphicTextGap="8.0" layoutX="612.0" layoutY="118.0" mnemonicParsing="false" />
+                                          <CheckBox layoutX="612.0" layoutY="156.0" mnemonicParsing="false" />
+                                          <Line endX="526.0" layoutX="116.0" layoutY="216.0" startX="-100.0" stroke="WHITE" />
+                                          <CheckBox layoutX="612.0" layoutY="242.0" mnemonicParsing="false" />
+                                          <CheckBox layoutX="612.0" layoutY="277.0" mnemonicParsing="false" />
+                                          <CheckBox layoutX="612.0" layoutY="310.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="21.0" />
+                                          <Line endX="526.0" layoutX="115.0" layoutY="357.0" startX="-100.0" stroke="WHITE" />
+                                          <CheckBox layoutX="612.0" layoutY="391.0" mnemonicParsing="false" />
+                                          <CheckBox layoutX="612.0" layoutY="426.0" mnemonicParsing="false" />
+                                          <CheckBox layoutX="612.0" layoutY="459.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="21.0" />
+                                          <CheckBox layoutX="612.0" layoutY="495.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="21.0" />
+                                          <Line endX="526.0" layoutX="115.0" layoutY="551.0" startX="-100.0" stroke="WHITE" />
+                                          <Button fx:id="btn_create_clients" layoutX="464.0" layoutY="591.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="169.0" styleClass="btn_client_create" stylesheets="@css/loginDesign.css" text="Create">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font></Button>
+                                          <TextField layoutX="23.0" layoutY="114.0" prefHeight="30.0" prefWidth="556.0" promptText="Client Name">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <Line endX="449.0" layoutX="116.0" layoutY="77.0" startX="-100.0" stroke="WHITE" />
+                                          <TextField layoutX="23.0" layoutY="150.0" prefHeight="30.0" prefWidth="556.0" promptText="Secondary Name">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField layoutX="23.0" layoutY="236.0" prefHeight="30.0" prefWidth="556.0" promptText="Address Line 1">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField layoutX="23.0" layoutY="271.0" prefHeight="30.0" prefWidth="556.0" promptText="Address Line 2">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField layoutX="23.0" layoutY="306.0" prefHeight="30.0" prefWidth="556.0" promptText="Address Line 3">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField layoutX="23.0" layoutY="385.0" prefHeight="30.0" prefWidth="556.0" promptText="City">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField layoutX="23.0" layoutY="420.0" prefHeight="30.0" prefWidth="556.0" promptText="State / Province">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField layoutX="23.0" layoutY="455.0" prefHeight="30.0" prefWidth="556.0" promptText="Post Code / ZIP Code">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField layoutX="23.0" layoutY="491.0" prefHeight="30.0" prefWidth="556.0" promptText="Country">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField layoutX="23.0" layoutY="593.0" prefHeight="30.0" prefWidth="202.0" promptText="Number of entities to create">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="anchor_create_site" prefHeight="717.0" prefWidth="663.0" visible="false">
+                                       <children>
+                                          <Button layoutX="325.0" layoutY="317.0" mnemonicParsing="false" text="creae sites" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="anchor_create_siteuser" layoutY="-2.0" prefHeight="719.0" prefWidth="662.0" visible="false">
+                                       <children>
+                                          <Button layoutX="166.0" layoutY="148.0" mnemonicParsing="false" text="create siteuser" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <Label layoutX="893.0" layoutY="754.0" text="Version 1.0" textFill="#908a8a" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

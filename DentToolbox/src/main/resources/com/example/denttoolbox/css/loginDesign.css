@@ -1,0 +1,85 @@
+.left-form{
+    -fx-background-color:linear-gradient(to bottom right, #214DFD,#B721FF);
+    -fx-border-color:#000;
+    -fx-border-width: .4px 0px .4px .4px;
+}
+
+.title-text{
+    -fx-animation: fadeIn 5s;
+}
+.title-text:hover{
+    -fx-font-size:27px;
+}
+
+.rocket{
+}
+
+.rocket:hover{
+    -fx-font-size:15.5em;
+}
+
+.right-form{
+    -fx-background-image: url(Untitled.png);
+    -fx-border-color:#000;
+    -fx-border-width: .4px .4px .4px 0px;
+}
+
+.error-button {
+      -fx-background-color: transparent;
+      -fx-background-repeat: no-repeat;
+      -fx-border: none;
+      -fx-cursor: pointer;
+      -fx-overflow: hidden;
+      -fx-outline: none;
+}
+
+.error-button:hover {
+    -fx-background-color:linear-gradient(to bottom right, #ed4747,#e70f0f);
+    -fx-cursor:hand;
+}
+
+
+.close {
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+}
+
+.close:hover{
+    -fx-background-color:#f43f57;
+}
+
+.textfield {
+    -fx-text-inner-color: #B392F2;
+    -fx-background-color:transparent;
+    -fx-font-size:14px;
+    -fx-font-family:"Tahoma";
+    -fx-alignment: center ;
+    -fx-border-color:#b56fdd;
+    -fx-border-radius:5px;
+    -fx-border-width:.4px;
+}
+
+.textfield:focused {
+    -fx-background-color:#b56fdd;
+}
+
+.login-btn{
+    -fx-background-color:linear-gradient(to bottom, #1c936d, #245b55);
+    -fx-background-radius:4px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+    -fx-cursor:hand;
+}
+
+.login-btn:hover{
+    -fx-background-color:linear-gradient(to bottom, #19b17c, #1f7569);
+}
+
+.date-label{
+}
+
+.date-label:hover{
+    -fx-text-fill:#92fff7;
+    -fx-font-size:16px;
+}

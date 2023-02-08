@@ -2,6 +2,8 @@ package com.example.denttoolbox;
 
 import com.example.denttoolbox.datafetch.*;
 import com.example.denttoolbox.entity.*;
+import com.example.denttoolbox.exceptions.NoNumberOfEntitiesToCreateException;
+import com.example.denttoolbox.exceptions.NoclientNameException;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
@@ -55,6 +57,8 @@ public class DashboardController implements Initializable {
 
     @FXML
     private Label label_numberErrors;
+
+
 
 
     public DashboardController(){
@@ -185,6 +189,8 @@ public class DashboardController implements Initializable {
     private String inactiveEntityCreated = " -fx-text-fill:#4fd0e4;";
     private String activeButtonStyle = "-fx-background-color:linear-gradient(to right, #F80041, #8E0DA3)";
 
+    private String clientErrorsStyles = "-fx-background-color:red; -fx-background-radius:10px; -fx-opacity:0.74;";
+
     @FXML
     private AnchorPane anchorPaneModifyService;
 
@@ -268,6 +274,24 @@ public class DashboardController implements Initializable {
 
     // List to hold distribute data to write into excel
     public ArrayList<DistributeRow> dataForExcelFile = new ArrayList<>();
+
+    // CLIENT RELATED FIELDS
+    @FXML
+    private TextField txt_fld_number_of_clients_to_create;
+
+    @FXML
+    private TextField filed_clientName;
+    @FXML
+    private Label no_client_name_error_label;
+
+    @FXML
+    private CheckBox checkBox_randomClientName;
+    // CLIENT RELATED FIELDS
+
+
+    public void hide_error_button_client_create(){
+        no_client_name_error_label.setVisible(false);
+    }
     @FXML
     void saveErrorsFile(MouseEvent event) {
 
@@ -395,9 +419,28 @@ public class DashboardController implements Initializable {
 
         // CREATE CLIENTS BUTTON HANDLER
         btn_create_clients.setOnAction(new EventHandler<ActionEvent>() {
+
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("I am gpoing to create some lioents");
+
+
+                try{
+                    if (filed_clientName.getText().length() == 0 && checkBox_randomClientName.isSelected() == false){
+                        throw new NoclientNameException("501", "No client name provided");
+                    }
+                    if (txt_fld_number_of_clients_to_create.getText().length() == 0){
+                        throw new NoNumberOfEntitiesToCreateException("502", "No number of entitties to create provided");
+                    }
+                }catch(NoclientNameException e){
+                    no_client_name_error_label.setText("Please provide a value for the client name field or tick the randomize option");
+                    no_client_name_error_label.setStyle(clientErrorsStyles);
+                    no_client_name_error_label.setVisible(true);
+                } catch (NoNumberOfEntitiesToCreateException e) {
+                    no_client_name_error_label.setText("Please provide the number of clients to create");
+                    no_client_name_error_label.setStyle(clientErrorsStyles);
+                    no_client_name_error_label.setVisible(true);
+                }
+
             }
         });
 
@@ -444,6 +487,9 @@ public class DashboardController implements Initializable {
             lbl_current_sites.setStyle(activeEntityCreated);
             lbl_current_csiteusers.setStyle(inactiveEntityCreated);
 
+            // Hide the errors from the other views
+            no_client_name_error_label.setVisible(false);
+
         }else if (endpointSelected == "SiteUsers"){
             anchor_no_entity.setVisible(false);
             anchor_create_site.setVisible(false);
@@ -454,6 +500,10 @@ public class DashboardController implements Initializable {
             lbl_current_clients.setStyle(inactiveEntityCreated);
             lbl_current_sites.setStyle(inactiveEntityCreated);
             lbl_current_csiteusers.setStyle(activeEntityCreated);
+
+            // Hide the errors from the other views
+            no_client_name_error_label.setVisible(false);
+
         }else if(endpointSelected == "EntitlemetsSets"){
             anchor_no_entity.setVisible(false);
             anchor_create_site.setVisible(false);
@@ -464,6 +514,9 @@ public class DashboardController implements Initializable {
             lbl_current_clients.setStyle(inactiveEntityCreated);
             lbl_current_sites.setStyle(inactiveEntityCreated);
             lbl_current_csiteusers.setStyle(activeEntityCreated);
+
+            // Hide the errors from the other views
+            no_client_name_error_label.setVisible(false);
         }
     }
 

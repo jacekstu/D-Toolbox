@@ -48,6 +48,12 @@ public class DashboardController implements Initializable {
     @FXML
     private StackPane stackPane_loadingBarHolder;
 
+    // This Anchor will hold the stack pane that will hold the loading bar
+    @FXML
+    private AnchorPane createClientsLoadingRingAnchor;
+    @FXML
+    private StackPane stakPaneRingHolderEntities;
+
     @FXML
     private AnchorPane anchorPane_loading;
 
@@ -212,6 +218,8 @@ public class DashboardController implements Initializable {
     private AnchorPane anchorPane_servicesLoad;
 
     public RingProgressIndicator rpi = new RingProgressIndicator();
+    // Another loading ring, this time when creating entities
+    public RingProgressIndicator createEntititesRing = new RingProgressIndicator();
 
     public String endpointSelected;
 
@@ -332,6 +340,14 @@ public class DashboardController implements Initializable {
         rpi.makeIndeterminate();
         stackPane_loadingBarHolder.getChildren().add(rpi);
 
+        // Another loading ring (bar), this one to be used
+        // denoting progress in creating entities
+        createEntititesRing.setRingWidth(35);
+        createEntititesRing.setInnerCircleRadius(45);
+        createEntititesRing.makeIndeterminate();
+        stakPaneRingHolderEntities.getChildren().add(createEntititesRing);
+
+
         lbl_username.setText(data.getUsername());
         lbl_welcome_msg_username.setText(data.getUsername());
 
@@ -423,15 +439,25 @@ public class DashboardController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
 
-
                 try{
                     if (filed_clientName.getText().length() == 0 && checkBox_randomClientName.isSelected() == false){
                         throw new NoclientNameException("501", "No client name provided");
                     }
                     if (txt_fld_number_of_clients_to_create.getText().length() == 0){
                         throw new NoNumberOfEntitiesToCreateException("502", "No number of entitties to create provided");
+                    }else{
+                        Integer.parseInt(txt_fld_number_of_clients_to_create.getText());
                     }
-                }catch(NoclientNameException e){
+
+                    // Hide the anchors
+                    // - The  initial one, when no entity slected from the drop down window
+                    // then hide the create client anchor
+                    anchor_create_client.setVisible(false);
+                    anchor_no_entity.setVisible(false);
+                    createClientsLoadingRingAnchor.setVisible(true);
+                    createEntititesRing.setProgress(0);
+                    runCreateEntityTask();
+                } catch(NoclientNameException e){
                     no_client_name_error_label.setText("Please provide a value for the client name field or tick the randomize option");
                     no_client_name_error_label.setStyle(clientErrorsStyles);
                     no_client_name_error_label.setVisible(true);
@@ -439,10 +465,31 @@ public class DashboardController implements Initializable {
                     no_client_name_error_label.setText("Please provide the number of clients to create");
                     no_client_name_error_label.setStyle(clientErrorsStyles);
                     no_client_name_error_label.setVisible(true);
+                } catch (NumberFormatException e){
+                    System.out.println("This is not an integer");
+                    no_client_name_error_label.setText("Please provide a valid integer value");
+                    no_client_name_error_label.setStyle(clientErrorsStyles);
+                    no_client_name_error_label.setVisible(true);
                 }
 
             }
         });
+
+    }
+
+    private void runCreateEntityTask(){
+        int num  = 5;
+        CreateEntityTask cet = new CreateEntityTask(num);
+        cet.valueProperty().addListener(new ChangeListener<Integer>() {
+            @Override
+            public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
+
+            }
+        });
+
+        Thread th = new Thread(cet);
+        th.setDaemon(true);
+        th.start();
 
     }
 

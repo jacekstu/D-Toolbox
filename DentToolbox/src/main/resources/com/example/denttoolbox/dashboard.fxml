@@ -573,7 +573,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <TextField fx:id="txt_fld_number_of_clients_to_create" layoutX="23.0" layoutY="593.0" onKeyTyped="#hide_error_button_client_create" prefHeight="30.0" prefWidth="202.0" promptText="Number of entities to create">
+                                          <TextField fx:id="txt_fld_number_of_clients_to_create" layoutX="23.0" layoutY="593.0" onKeyTyped="#hide_error_button_client_create" prefHeight="30.0" prefWidth="421.0" promptText="Number of entities to create">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -596,6 +596,11 @@
                                     <AnchorPane fx:id="anchor_create_siteuser" layoutY="-2.0" prefHeight="719.0" prefWidth="662.0" visible="false">
                                        <children>
                                           <Button layoutX="166.0" layoutY="148.0" mnemonicParsing="false" text="create siteuser" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="createClientsLoadingRingAnchor" layoutX="2.0" layoutY="1.0" prefHeight="717.0" prefWidth="663.0" visible="false">
+                                       <children>
+                                          <StackPane fx:id="stakPaneRingHolderEntities" layoutX="82.0" layoutY="109.0" prefHeight="500.0" prefWidth="500.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>

@@ -533,42 +533,42 @@
                                              </font>
                                           </TextField>
                                           <Line endX="449.0" layoutX="116.0" layoutY="77.0" startX="-100.0" stroke="WHITE" />
-                                          <TextField layoutX="23.0" layoutY="150.0" prefHeight="30.0" prefWidth="556.0" promptText="Secondary Name">
+                                          <TextField fx:id="fieldSecondaryName" layoutX="23.0" layoutY="150.0" prefHeight="30.0" prefWidth="556.0" promptText="Secondary Name">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <TextField layoutX="23.0" layoutY="236.0" prefHeight="30.0" prefWidth="556.0" promptText="Address Line 1">
+                                          <TextField fx:id="fieldAddressLine1" layoutX="23.0" layoutY="236.0" prefHeight="30.0" prefWidth="556.0" promptText="Address Line 1">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <TextField layoutX="23.0" layoutY="271.0" prefHeight="30.0" prefWidth="556.0" promptText="Address Line 2">
+                                          <TextField fx:id="fieldAddressLine2" layoutX="23.0" layoutY="271.0" prefHeight="30.0" prefWidth="556.0" promptText="Address Line 2">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <TextField layoutX="23.0" layoutY="306.0" prefHeight="30.0" prefWidth="556.0" promptText="Address Line 3">
+                                          <TextField fx:id="fieldAddressLine3" layoutX="23.0" layoutY="306.0" prefHeight="30.0" prefWidth="556.0" promptText="Address Line 3">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <TextField layoutX="23.0" layoutY="385.0" prefHeight="30.0" prefWidth="556.0" promptText="City">
+                                          <TextField fx:id="fieldCity" layoutX="23.0" layoutY="385.0" prefHeight="30.0" prefWidth="556.0" promptText="City">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <TextField layoutX="23.0" layoutY="420.0" prefHeight="30.0" prefWidth="556.0" promptText="State / Province">
+                                          <TextField fx:id="fieldStateProvince" layoutX="23.0" layoutY="420.0" prefHeight="30.0" prefWidth="556.0" promptText="State / Province">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <TextField layoutX="23.0" layoutY="455.0" prefHeight="30.0" prefWidth="556.0" promptText="Post Code / ZIP Code">
+                                          <TextField fx:id="fieldPostCodeZipcode" layoutX="23.0" layoutY="455.0" prefHeight="30.0" prefWidth="556.0" promptText="Post Code / ZIP Code">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <TextField layoutX="23.0" layoutY="491.0" prefHeight="30.0" prefWidth="556.0" promptText="Country">
+                                          <TextField fx:id="fieldCountry" layoutX="23.0" layoutY="491.0" prefHeight="30.0" prefWidth="556.0" promptText="Country">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>

@@ -187,7 +187,6 @@ public class DataProviderService {
             case "siteUser" -> inventoryData.setLastSiteUserName(endpointNames.get(0));
         }
     }
-
     public void sendRequest() throws IOException, InterruptedException {
 
         String basicUrl = "http://localhost:8090/api/clients";
@@ -410,6 +409,8 @@ public class DataProviderService {
 
     public void checkForFailedRequest(HttpResponse<String> resp, String url, String body){
 
+        System.out.println(resp.statusCode());
+
         if (resp.statusCode() != 200){
             String[] newError = {resp.body(), url, body};
             errorSingleton.addError(newError);
@@ -429,6 +430,50 @@ public class DataProviderService {
             }
         }
         return ids;
+    }
+
+    public void postClient(String clientName,
+                           String secondaryName,
+                           String addr1,
+                           String addr2,
+                           String addr3,
+                           String city,
+                           String postCode,
+                           String country,
+                           String reportingId,
+                           String stateProvince) throws IOException, InterruptedException {
+
+        client = HttpClient.newHttpClient();
+        userpass = data.getUsername() + ":" + data.getPassword();
+        basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
+
+        basicUrl = "http://" + data.getHostname() + ":" + data.getPortNumber() + "/api/clients";
+
+        String fullPayload = "{\"clientName\":\"" + clientName +
+                "\",\"clientType\":\"VENDOR\"," +
+                "\"clientName2\":\"" + secondaryName +
+                "\",\"address1\":\"" + addr1 +
+                "\",\"address2\":\"" + addr2 +
+                "\",\"address3\":\"" + addr3 +
+                "\",\"postCode\":\"" + postCode +
+                "\",\"vendorReportingId\":\"" + reportingId +
+                "\",\"country\":\"" + country +
+                "\",\"stateProvince\":\"" + stateProvince +
+                "\",\"city\":\"" + city + "\"}";
+
+        System.out.println(fullPayload);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .setHeader("Authorization", basicAuth)
+                .setHeader("Content-Type", "application/json")
+                .uri(URI.create(basicUrl))
+                .POST(HttpRequest.BodyPublishers.ofString(fullPayload))
+                .build();
+
+        HttpResponse<String> res= client.send(request,
+                HttpResponse.BodyHandlers.ofString());
+
+        checkForFailedRequest(res, basicUrl, fullPayload);
     }
 
 }

@@ -294,11 +294,38 @@ public class DashboardController implements Initializable {
 
     @FXML
     private CheckBox checkBox_randomClientName;
+
+    @FXML
+    private TextField fieldSecondaryName;
+
+    @FXML
+    private TextField fieldAddressLine1;
+
+    @FXML
+    private TextField fieldAddressLine2;
+
+    @FXML
+    private TextField fieldAddressLine3;
+
+    @FXML
+    private TextField fieldCity;
+
+    @FXML
+    private TextField fieldStateProvince;
+
+    @FXML
+    private TextField fieldPostCodeZipcode;
+
+    @FXML
+    private TextField fieldCountry;
     // CLIENT RELATED FIELDS
 
 
+
     public void hide_error_button_client_create(){
+
         no_client_name_error_label.setVisible(false);
+
     }
     @FXML
     void saveErrorsFile(MouseEvent event) {
@@ -329,6 +356,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
 
         ComboBox_sitesSelectEndpoint.getItems().addAll(endpoints);
         ComboBox_sitesSelectEndpoint.setDisable(true);
@@ -449,6 +477,21 @@ public class DashboardController implements Initializable {
                         Integer.parseInt(txt_fld_number_of_clients_to_create.getText());
                     }
 
+                    // create client singleton class
+                    ClientSingletonClass csc = ClientSingletonClass.getInstance();
+
+                    csc.setClientName(filed_clientName.getText());
+                    csc.setSecondaryName(fieldSecondaryName.getText());
+                    csc.setAddress1(fieldAddressLine1.getText());
+                    csc.setAddress2(fieldAddressLine2.getText());
+                    csc.setAddress3(fieldAddressLine3.getText());
+                    csc.setCity(fieldCity.getText());
+                    csc.setPostCode(fieldPostCodeZipcode.getText());
+                    csc.setStateProvince(fieldStateProvince.getText());
+                    csc.setCountry(fieldCountry.getText());
+                    //csc.setVendorReportingId(fi);
+
+
                     // Hide the anchors
                     // - The  initial one, when no entity slected from the drop down window
                     // then hide the create client anchor
@@ -456,7 +499,7 @@ public class DashboardController implements Initializable {
                     anchor_no_entity.setVisible(false);
                     createClientsLoadingRingAnchor.setVisible(true);
                     createEntititesRing.setProgress(0);
-                    runCreateEntityTask();
+                    runCreateEntityTask("client", Integer.parseInt(txt_fld_number_of_clients_to_create.getText()));
                 } catch(NoclientNameException e){
                     no_client_name_error_label.setText("Please provide a value for the client name field or tick the randomize option");
                     no_client_name_error_label.setStyle(clientErrorsStyles);
@@ -474,15 +517,35 @@ public class DashboardController implements Initializable {
 
             }
         });
-
     }
 
-    private void runCreateEntityTask(){
-        int num  = 5;
-        CreateEntityTask cet = new CreateEntityTask(num);
+    public void clean_client_create_fields(){
+        filed_clientName.setText("");
+        fieldSecondaryName.setText("");
+        fieldAddressLine1.setText("");
+        fieldAddressLine2.setText("");
+        fieldAddressLine3.setText("");
+        fieldCity.setText("");
+        fieldPostCodeZipcode.setText("");
+        fieldStateProvince.setText("");
+        fieldCountry.setText("");
+    }
+
+    private void runCreateEntityTask(String entity, int numberOfEntities){
+
+        CreateEntityTask cet = new CreateEntityTask(numberOfEntities, entity);
         cet.valueProperty().addListener(new ChangeListener<Integer>() {
             @Override
             public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
+                System.out.println(t1 + "<<< this is t1");
+                if (t1 == numberOfEntities){
+                    createClientsLoadingRingAnchor.setVisible(false);
+                    clean_client_create_fields();
+                    anchor_create_client.setVisible(true);
+                }else{
+                    double percent = ( (double )t1 / (double )numberOfEntities) * 100;
+                    createEntititesRing.setProgress((int) Math.round(percent));
+                }
 
             }
         });

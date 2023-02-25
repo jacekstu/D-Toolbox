@@ -499,7 +499,8 @@ public class DashboardController implements Initializable {
                     anchor_no_entity.setVisible(false);
                     createClientsLoadingRingAnchor.setVisible(true);
                     createEntititesRing.setProgress(0);
-                    runCreateEntityTask("client", Integer.parseInt(txt_fld_number_of_clients_to_create.getText()));
+                    runCreateEntityTask("client",
+                            Integer.parseInt(txt_fld_number_of_clients_to_create.getText()));
                 } catch(NoclientNameException e){
                     no_client_name_error_label.setText("Please provide a value for the client name field or tick the randomize option");
                     no_client_name_error_label.setStyle(clientErrorsStyles);
@@ -542,6 +543,18 @@ public class DashboardController implements Initializable {
                     createClientsLoadingRingAnchor.setVisible(false);
                     clean_client_create_fields();
                     anchor_create_client.setVisible(true);
+                    // update the inventory
+                    // run the get entities function, that runs the get posts for clients/sites and user
+                    dataProv.getEntities();
+                    // update all the lables showing the current number of clients
+                    lbl_current_clients.setText(inventoryData.getClientsNumber());
+                    lbl_number_of_clients.setText(inventoryData.getClientsNumber());
+                    lbl_numberPendingChanges.setText(String.valueOf((inventoryData.getNumberOfPendingDistributes() - 1)));
+                    lbl_lastClient.setText(inventoryData.getLastClientName());
+                    // Reset the number of clients to create field
+                    txt_fld_number_of_clients_to_create.setText("");
+
+
                 }else{
                     double percent = ( (double )t1 / (double )numberOfEntities) * 100;
                     createEntititesRing.setProgress((int) Math.round(percent));

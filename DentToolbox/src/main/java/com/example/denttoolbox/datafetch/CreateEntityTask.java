@@ -23,6 +23,7 @@ public class CreateEntityTask extends Task<Integer> {
 
         while(already_created != (numberOfEntitiesToCreate)){
             dps.postClient(
+                    already_created,
                     csc.getClientName(),
                     csc.getSecondaryName(),
                     csc.getAddress1(),

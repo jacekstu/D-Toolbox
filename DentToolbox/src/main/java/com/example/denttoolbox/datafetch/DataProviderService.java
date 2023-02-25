@@ -432,7 +432,8 @@ public class DataProviderService {
         return ids;
     }
 
-    public void postClient(String clientName,
+    public void postClient(int counter,
+                           String clientName,
                            String secondaryName,
                            String addr1,
                            String addr2,
@@ -449,7 +450,7 @@ public class DataProviderService {
 
         basicUrl = "http://" + data.getHostname() + ":" + data.getPortNumber() + "/api/clients";
 
-        String fullPayload = "{\"clientName\":\"" + clientName +
+        String fullPayload = "{\"clientName\":\"" + shortenTheString(clientName, 255, counter) +
                 "\",\"clientType\":\"VENDOR\"," +
                 "\"clientName2\":\"" + secondaryName +
                 "\",\"address1\":\"" + addr1 +
@@ -474,6 +475,23 @@ public class DataProviderService {
                 HttpResponse.BodyHandlers.ofString());
 
         checkForFailedRequest(res, basicUrl, fullPayload);
+    }
+
+    public String shortenTheString(String toShorten, int maxLength, int counter){
+
+        if (toShorten.length() == 0){
+            return toShorten;
+        }
+
+        toShorten = toShorten + String.valueOf(counter);
+
+        int firstIndex = 0;
+
+        while (toShorten.length() > maxLength){
+            toShorten = toShorten.substring(firstIndex + 1, toShorten.length());
+        }
+
+        return toShorten;
     }
 
 }

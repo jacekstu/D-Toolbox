@@ -4,6 +4,7 @@ import com.example.denttoolbox.datafetch.*;
 import com.example.denttoolbox.entity.*;
 import com.example.denttoolbox.exceptions.NoNumberOfEntitiesToCreateException;
 import com.example.denttoolbox.exceptions.NoclientNameException;
+import com.example.denttoolbox.exceptions.SingleOptionException;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
@@ -40,6 +41,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 
@@ -296,6 +298,10 @@ public class DashboardController implements Initializable {
     private CheckBox checkBox_randomClientName;
 
     @FXML
+    private CheckBox checkBoxSecondary;
+
+
+    @FXML
     private TextField fieldSecondaryName;
 
     @FXML
@@ -480,8 +486,23 @@ public class DashboardController implements Initializable {
                     // create client singleton class
                     ClientSingletonClass csc = ClientSingletonClass.getInstance();
 
-                    csc.setClientName(filed_clientName.getText());
-                    csc.setSecondaryName(fieldSecondaryName.getText());
+                    if (filed_clientName.getText().length() > 0 && checkBox_randomClientName.isSelected() == true){
+                        throw new SingleOptionException("503", "Either provide value for client name parameter or select randomize option");
+                    }else if(filed_clientName.getText().length() == 0 && checkBox_randomClientName.isSelected() == true){
+                        csc.setClientName(setRandomName(255));
+                    }else{
+                        csc.setClientName(filed_clientName.getText());
+                    }
+
+                    if (fieldSecondaryName.getText().length() > 0 && checkBoxSecondary.isSelected() == true){
+                        throw new SingleOptionException("503", "Either provide value for secondary name parameter or select randomize option");
+                    }else if(fieldSecondaryName.getText().length() == 0 && checkBoxSecondary.isSelected() == true){
+                        csc.setSecondaryName(setRandomName(255));
+                    }
+                    else{
+                        csc.setSecondaryName(fieldSecondaryName.getText());
+                    }
+
                     csc.setAddress1(fieldAddressLine1.getText());
                     csc.setAddress2(fieldAddressLine2.getText());
                     csc.setAddress3(fieldAddressLine3.getText());
@@ -512,6 +533,10 @@ public class DashboardController implements Initializable {
                 } catch (NumberFormatException e){
                     System.out.println("This is not an integer");
                     no_client_name_error_label.setText("Please provide a valid integer value");
+                    no_client_name_error_label.setStyle(clientErrorsStyles);
+                    no_client_name_error_label.setVisible(true);
+                } catch (SingleOptionException e) {
+                    no_client_name_error_label.setText(e.getMessage());
                     no_client_name_error_label.setStyle(clientErrorsStyles);
                     no_client_name_error_label.setVisible(true);
                 }
@@ -553,6 +578,10 @@ public class DashboardController implements Initializable {
                     lbl_lastClient.setText(inventoryData.getLastClientName());
                     // Reset the number of clients to create field
                     txt_fld_number_of_clients_to_create.setText("");
+
+                    // Reset the check boxes
+                    checkBox_randomClientName.selectedProperty().setValue(false);
+                    checkBoxSecondary.selectedProperty().setValue(false);
 
 
                 }else{
@@ -785,6 +814,7 @@ public class DashboardController implements Initializable {
                         table_services.setItems(sortedData);
 
                         // update the number of pedning distributes in the home page
+                        dataProv.getEntities();
                         lbl_numberPendingChanges.setText(String.valueOf((inventoryData.getNumberOfPendingDistributes() - 1)));
 
 
@@ -861,8 +891,8 @@ public class DashboardController implements Initializable {
 
 
                         // update the number of pedning distributes in the home page
-
-                        lbl_numberPendingChanges.setText(String.valueOf((inventoryData.getNumberOfPendingDistributes() - 1)));
+                        dataProv.getEntities();
+                        lbl_numberPendingChanges.setText(String.valueOf(inventoryData.getNumberOfPendingDistributes()));
 
                         btn_loadFile.setDisable(false);
 
@@ -871,6 +901,8 @@ public class DashboardController implements Initializable {
 
                         // display the excel download button
                         btn_excelDownload.setVisible(true);
+
+
 
                         // Clear the objects
                         rdus.setRows(null);
@@ -1188,6 +1220,32 @@ public class DashboardController implements Initializable {
         return servicesRows;
     }
 
+    public String setRandomName(int numChars){
 
+        Random rand = new Random();
+
+        // get the length of the String
+        int num = rand.nextInt(numChars - 1);
+
+        String value = "";
+
+        for (int i = 0 ; i < num; i++){
+            value += randomChar();
+        }
+        return value;
+    }
+
+    public char randomChar(){
+        Random rand = new Random();
+
+        char [] letters = {'a', 'b', 'c', 'd', 'e','f', 'g', 'h', 'i',
+                'j','k','l','m','n','o','p','r','s','t','u','w','x','y','z',
+                'A', 'B', 'C', 'D', 'E','F', 'G', 'H', 'I',
+                'J','K','L','M','N','O','P','R','S','T','U','W','X','Y','Z'
+        };
+
+        return letters[rand.nextInt(letters.length)];
+
+    }
 
 }

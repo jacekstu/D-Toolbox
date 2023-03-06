@@ -282,6 +282,53 @@ public class DataProviderService {
         return entityId;
     }
 
+    public List<String> getClientsNames(){
+        List<String> clientNames = new ArrayList<>();
+
+        client = HttpClient.newHttpClient();
+        userpass = data.getUsername() + ":" + data.getPassword();
+        basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
+
+        basicUrl = "http://" + data.getHostname() + ":" + data.getPortNumber() + "/api/clients?size=100000";
+
+        HttpRequest req = null;
+        try {
+
+            System.out.println("Calling the clients list!!!");
+            req = HttpRequest.newBuilder()
+                    .GET()
+                    .uri(new URI(basicUrl))
+                    .header("Authorization",basicAuth)
+                    .header("Content-Type","application/json")
+                    .build();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        HttpResponse response = null;
+        try {
+            response = client.send(req, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        String responseString = (String) response.body();
+
+        JsonParser parser = new JsonParser();
+        JsonObject json = (JsonObject) parser.parse(responseString);
+
+        for (Map.Entry<String, JsonElement> key : json.entrySet()){
+            if (key.getKey().equals("content")){
+                JsonElement elements = key.getValue();
+                for (JsonElement e : elements.getAsJsonArray()){
+                    clientNames.add(e.getAsJsonObject().get("clientName").getAsString());
+                }
+            }
+        }
+
+        return clientNames;
+    }
+
     public int getNumberOfUsersBelongingToASite(String siteId){
 
         int numberOfUsers = 0;

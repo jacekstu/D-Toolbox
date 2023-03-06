@@ -66,9 +66,6 @@ public class DashboardController implements Initializable {
     @FXML
     private Label label_numberErrors;
 
-
-
-
     public DashboardController(){
 
     }
@@ -190,6 +187,9 @@ public class DashboardController implements Initializable {
     // to create
     @FXML
     private ComboBox<String> combobox_endpoints;
+
+    @FXML
+    private ComboBox <String> comboBoxClients;
     private String[] create_endpoints = {"Clients","Sites", "SiteUsers", "EntitlementSets"};
 
     private String inactiveButtonStyle = "-fx-background-color:transparent";
@@ -369,6 +369,9 @@ public class DashboardController implements Initializable {
 
         // populate combobox with options
         combobox_endpoints.getItems().addAll(create_endpoints);
+
+        // Create and populate clients drop down window
+        comboBoxClients.getItems().addAll(dataProv.getClientsNames());
 
         rpi.setRingWidth(25);
         rpi.makeIndeterminate();
@@ -583,12 +586,13 @@ public class DashboardController implements Initializable {
                     checkBox_randomClientName.selectedProperty().setValue(false);
                     checkBoxSecondary.selectedProperty().setValue(false);
 
+                    // make sure the create site view will get the latest clients
+                    comboBoxClients.getItems().addAll(dataProv.getClientsNames());
 
                 }else{
                     double percent = ( (double )t1 / (double )numberOfEntities) * 100;
                     createEntititesRing.setProgress((int) Math.round(percent));
                 }
-
             }
         });
 

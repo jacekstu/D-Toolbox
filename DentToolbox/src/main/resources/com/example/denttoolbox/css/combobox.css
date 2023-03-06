@@ -1,0 +1,32 @@
+
+.combo-box_site{
+    -fx-background-color: transparent;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+}
+
+.combo-box-popup > .list-view {
+    -fx-pref-width: 588;
+}
+
+.combo-box_site:focused{
+    -fx-background-color:#b56fdd;
+}
+.combo-box_site:hover{
+    -fx-background-color:#C68FE5;
+}
+
+.combo-box_site .list-cell {
+ -fx-background-color:transparent;
+ -fx-text-fill:#fff;
+}
+
+.combo-box_site .list-view .list-cell {
+ -fx-background-color:#b56fdd;
+ -fx-text-fill:#fff;
+}
+
+.combo-box_site .list-view .list-cell:hover {
+ -fx-background-color:linear-gradient(to right, #FF0D77,#9F26C5);
+ -fx-text-fill:#fff;
+}
